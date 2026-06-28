@@ -1,0 +1,596 @@
+/* ============================================================
+   Global
+============================================================ */
+
+:root {
+  --bg: #f3f6fb;
+  --card-bg: #ffffff;
+  --text: #172033;
+  --text-soft: #4b5563;
+  --text-muted: #7b8494;
+
+  --primary: #2454e6;
+  --primary-dark: #1d4ed8;
+  --primary-soft: #eef4ff;
+
+  --danger: #ef4444;
+  --danger-dark: #991b1b;
+  --danger-soft: #fff1f1;
+
+  --warning: #f97316;
+  --warning-soft: #fff7ed;
+
+  --safe: #16a34a;
+  --safe-soft: #ecfdf3;
+
+  --border: #dfe6f0;
+  --shadow: 0 14px 34px rgba(15, 23, 42, 0.07);
+  --shadow-strong: 0 26px 80px rgba(15, 23, 42, 0.22);
+
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(36, 84, 230, 0.08), transparent 32%),
+    radial-gradient(circle at top right, rgba(239, 68, 68, 0.08), transparent 30%),
+    var(--bg);
+  color: var(--text);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans KR",
+    sans-serif;
+}
+
+button {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  box-shadow: 0 8px 18px rgba(29, 78, 216, 0.22);
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    filter 0.16s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 11px 22px rgba(29, 78, 216, 0.28);
+  filter: brightness(1.02);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(29, 78, 216, 0.2);
+}
+
+button.secondary {
+  background: #eef1f6;
+  color: #273449;
+  box-shadow: none;
+}
+
+button.secondary:hover {
+  background: #e5e9f0;
+  box-shadow: none;
+}
+
+p {
+  margin: 6px 0;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   Page Layout
+============================================================ */
+
+.page {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+
+/* ============================================================
+   Hero
+============================================================ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 172px;
+  margin-bottom: 24px;
+  padding: 34px 30px;
+  border-radius: var(--radius-xl);
+  color: white;
+  background:
+    linear-gradient(135deg, rgba(30, 64, 175, 0.96), rgba(239, 68, 68, 0.96)),
+    linear-gradient(135deg, #1d4ed8, #ef4444);
+  box-shadow: 0 24px 52px rgba(31, 64, 175, 0.2);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  left: -80px;
+  top: -120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  right: -130px;
+  bottom: -210px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hero > div {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.eyebrow {
+  margin: 0 0 9px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  opacity: 0.9;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(26px, 3.3vw, 38px);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.description {
+  max-width: 770px;
+  margin: 0 auto;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.75;
+  opacity: 0.96;
+  text-align: center;
+}
+
+/* ============================================================
+   Grid and Cards
+============================================================ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+.card {
+  min-height: 238px;
+  padding: 23px 22px 22px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.1);
+  border-color: #cbd7e8;
+}
+
+.card-title {
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+
+  color: #182235;
+  font-size: 15px;
+  font-weight: 900;
+  text-align: left;
+}
+
+.card-title svg {
+  flex: 0 0 auto;
+  color: #1f2937;
+}
+
+.card .value {
+  width: 100%;
+  margin: 5px 0 7px;
+  font-size: clamp(20px, 2.4vw, 25px);
+  font-weight: 950;
+  letter-spacing: -0.04em;
+  color: #111827;
+  text-align: center;
+}
+
+.card p {
+  max-width: 100%;
+  color: var(--text-soft);
+  font-size: 14px;
+  text-align: center;
+}
+
+.card strong {
+  color: #111827;
+  font-weight: 900;
+}
+
+.card > button {
+  margin: 10px auto 0;
+}
+
+/* 카드 내부 컨텐츠를 자연스럽게 중앙 배치 */
+.card > :not(.card-title) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   States and Text
+============================================================ */
+
+.muted {
+  color: var(--text-muted) !important;
+}
+
+.ok {
+  color: var(--safe);
+  font-weight: 900;
+}
+
+.error {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--danger-soft);
+  color: var(--danger-dark) !important;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* ============================================================
+   Badge
+============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.badge.안전 {
+  background: var(--safe-soft);
+  color: #166534;
+}
+
+.badge.주의 {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.badge.경고 {
+  background: var(--warning-soft);
+  color: #9a3412;
+}
+
+.badge.위험 {
+  background: #fee2e2;
+  color: var(--danger-dark);
+}
+
+/* ============================================================
+   Beacon Box
+============================================================ */
+
+.beacon-box {
+  width: 100%;
+  margin: 13px 0 12px;
+  padding: 14px 15px;
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(180deg, #f8fafc, #f3f6fa);
+  border: 1px solid #edf1f7;
+  text-align: center;
+}
+
+.beacon-box p {
+  margin: 4px 0;
+  color: #334155;
+  font-weight: 600;
+}
+
+/* ============================================================
+   Buttons Row
+============================================================ */
+
+.button-row {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   Status Box
+============================================================ */
+
+.status {
+  margin-top: 18px;
+  padding: 22px 24px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, #f0f7ff, #eaf3ff);
+  border: 1px solid #bfd8ff;
+  color: #1e3a8a;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+}
+
+.status strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 950;
+}
+
+.status p {
+  margin: 0;
+  color: #234a9b;
+  font-weight: 650;
+}
+
+.status.danger {
+  background:
+    linear-gradient(180deg, #fff1f1, #ffe8e8);
+  border-color: #fecaca;
+  color: var(--danger-dark);
+  box-shadow: 0 10px 24px rgba(239, 68, 68, 0.1);
+}
+
+.status.danger p {
+  color: var(--danger-dark);
+}
+
+/* ============================================================
+   Modal
+============================================================ */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  padding: 22px;
+  background: rgba(15, 23, 42, 0.62);
+  backdrop-filter: blur(8px);
+
+  display: grid;
+  place-items: center;
+}
+
+.modal {
+  width: min(540px, 100%);
+  max-height: calc(100vh - 44px);
+  overflow-y: auto;
+  padding: 30px 28px 26px;
+  border-radius: 30px;
+  background: white;
+  box-shadow: var(--shadow-strong);
+  text-align: center;
+  animation: modalIn 0.2s ease-out;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-icon {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 14px;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 30% 20%, #fff, transparent 34%),
+    #fee2e2;
+  color: var(--danger);
+  display: grid;
+  place-items: center;
+}
+
+.modal h2 {
+  margin: 0 0 14px;
+  font-size: 26px;
+  font-weight: 950;
+  letter-spacing: -0.045em;
+  color: #111827;
+}
+
+.modal p {
+  color: #374151;
+  font-size: 15px;
+}
+
+.shelter-alert {
+  margin: 18px 0;
+  padding: 18px 16px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, #fff7f7, #fff1f1);
+  border: 1px solid #fecaca;
+  text-align: center;
+}
+
+.shelter-alert p {
+  margin: 4px 0;
+}
+
+.shelter-alert h3 {
+  margin: 5px 0 8px;
+  color: #111827;
+  font-size: 20px;
+  font-weight: 950;
+  letter-spacing: -0.035em;
+}
+
+.voice-text {
+  margin: 16px 0 8px;
+  padding: 14px 15px;
+  border-radius: var(--radius-md);
+  background: #f8fafc;
+  color: #273449 !important;
+  line-height: 1.7;
+  font-weight: 750;
+}
+
+/* ============================================================
+   Responsive
+============================================================ */
+
+@media (max-width: 860px) {
+  .page {
+    width: min(100% - 28px, 720px);
+    padding-top: 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    width: min(100% - 22px, 520px);
+    padding-top: 14px;
+  }
+
+  .hero {
+    min-height: 150px;
+    padding: 28px 20px;
+    border-radius: 24px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .card {
+    padding: 20px 18px;
+    border-radius: 20px;
+  }
+
+  .card-title {
+    font-size: 14px;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .button-row button {
+    width: 100%;
+  }
+
+  button {
+    width: auto;
+    min-height: 38px;
+  }
+
+  .modal {
+    padding: 26px 20px 22px;
+    border-radius: 24px;
+  }
+
+  .modal h2 {
+    font-size: 23px;
+  }
+}
